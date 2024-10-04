@@ -22,7 +22,7 @@ int main() {
     Node *head = nullptr;
     
     head = addNodeToHead(head); 
-    //output(head); 
+    output(head); 
 
     head = addNodeToTail(head);
     output(head);
@@ -98,7 +98,7 @@ Node * addNodeToTail(Node * head)
             } 
     
         newN->next = newNode; 
-     
+        newNode->next = nullptr; 
     }
 
     return head;
