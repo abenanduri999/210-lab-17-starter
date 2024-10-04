@@ -9,7 +9,8 @@ struct Node {
 };
 
 void output(Node *);
-Node * addNode(Node *);
+Node * addNodeToHead(Node *);
+Node * addNodeToTail(Node *); 
 Node * deleteNode(Node *); 
 Node * insertNode(Node *); 
 void deleteList(Node *); 
@@ -20,8 +21,11 @@ void deleteList(Node *);
 int main() {
     Node *head = nullptr;
     int count = 0;
-    head = addNode(head); 
+    head = addNodeToHead(head); 
     output(head); 
+
+    head = addNodeToTail(head);
+    output(head);
 
     head = deleteNode(head);
     output(head); 
@@ -49,7 +53,7 @@ void output(Node * hd) {
     cout << endl;
 }
 
-Node * addNode(Node * head) 
+Node * addNodeToHead(Node * head) 
 {
 // create a linked list of size SIZE with random numbers 0-99
     for (int i = 0; i < SIZE; i++) {
@@ -69,6 +73,34 @@ Node * addNode(Node * head)
         }
     }
     return head; 
+}
+
+Node * addNodeToTail(Node * head)
+{
+    int val = rand() % 100; 
+    Node * newNode = new Node; 
+
+    if(!head)   // check to see if list if empty
+    {
+        head = newNode;
+        newNode->next = nullptr; 
+        newNode->value = val; 
+    }
+
+    else
+    {
+        newNode->value = val;
+        Node * current = head;
+        while(current->next) 
+            {
+                current = current->next;
+            } 
+    
+        current->next = newNode; 
+     
+    }
+
+    return head;
 }
 
 Node  * deleteNode(Node * head) 
