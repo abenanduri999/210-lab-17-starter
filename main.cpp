@@ -9,31 +9,11 @@ struct Node {
 };
 
 void output(Node *);
-
-int main() {
-    Node *head = nullptr;
-    int count = 0;
-
-    // create a linked list of size SIZE with random numbers 0-99
-    for (int i = 0; i < SIZE; i++) {
-        int tmp_val = rand() % 100;
-        Node *newVal = new Node;
-        
-        // adds node at head
-        if (!head) { // if this is the first node, it's the new head
-            head = newVal;
-            newVal->next = nullptr;
-            newVal->value = tmp_val;
-        }
-        else { // its a second or subsequent node; place at the head
-            newVal->next = head;
-            newVal->value = tmp_val;
-            head = newVal;
-        }
-    }
-    output(head);
-
-    // deleting a node
+void addNode(Node *);
+void deleteNode(Node *); 
+void deleteNode(Node * head) 
+{
+     // deleting a node
     Node * current = head;
     cout << "Which node to delete? " << endl;
     output(head);
@@ -58,9 +38,22 @@ int main() {
         current = nullptr;
     }
     output(head);
+}
+
+
+
+int main() {
+    Node *head = nullptr;
+    int count = 0;
+    addNode(head); 
+    
+
+    deleteNode(head);
+   
 
     // insert a node
-    current = head;
+    int entry;
+    Node * current = head;
     cout << "After which node to insert 10000? " << endl;
     count = 1;
     while (current) {
@@ -71,7 +64,7 @@ int main() {
     cin >> entry;
 
     current = head;
-    prev = head;
+    Node * prev = head;
     for (int i = 0; i < (entry); i++)
         if (i == 0)
             current = current->next;
@@ -111,4 +104,26 @@ void output(Node * hd) {
         current = current->next;
     }
     cout << endl;
+}
+
+void addNode(Node * head) 
+{
+// create a linked list of size SIZE with random numbers 0-99
+    for (int i = 0; i < SIZE; i++) {
+        int tmp_val = rand() % 100;
+        Node *newVal = new Node;
+        
+        // adds node at head
+        if (!head) { // if this is the first node, it's the new head
+            head = newVal;
+            newVal->next = nullptr;
+            newVal->value = tmp_val;
+        }
+        else { // its a second or subsequent node; place at the head
+            newVal->next = head;
+            newVal->value = tmp_val;
+            head = newVal;
+        }
+    }
+    output(head);
 }
