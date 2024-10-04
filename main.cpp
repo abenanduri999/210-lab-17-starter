@@ -9,9 +9,69 @@ struct Node {
 };
 
 void output(Node *);
-void addNode(Node *);
-void deleteNode(Node *); 
-void deleteNode(Node * head) 
+Node * addNode(Node *);
+Node * deleteNode(Node *); 
+Node * insertNode(Node *); 
+void deleteList(Node *); 
+ 
+
+
+
+int main() {
+    Node *head = nullptr;
+    int count = 0;
+    head = addNode(head); 
+    output(head); 
+
+    head = deleteNode(head);
+    output(head); 
+    
+    head = insertNode(head); 
+    output(head); 
+
+    deleteList(head); 
+    
+
+    return 0;
+}
+
+void output(Node * hd) {
+    if (!hd) {
+        cout << "Empty list.\n";
+        return;
+    }
+    int count = 1;
+    Node * current = hd;
+    while (current) {
+        cout << "[" << count++ << "] " << current->value << endl;
+        current = current->next;
+    }
+    cout << endl;
+}
+
+Node * addNode(Node * head) 
+{
+// create a linked list of size SIZE with random numbers 0-99
+    for (int i = 0; i < SIZE; i++) {
+        int tmp_val = rand() % 100;
+        Node *newVal = new Node;
+        
+        // adds node at head
+        if (!head) { // if this is the first node, it's the new head
+            head = newVal;
+            newVal->next = nullptr;
+            newVal->value = tmp_val;
+        }
+        else { // its a second or subsequent node; place at the head
+            newVal->next = head;
+            newVal->value = tmp_val;
+            head = newVal;
+        }
+    }
+    return head; 
+}
+
+Node  * deleteNode(Node * head) 
 {
      // deleting a node
     Node * current = head;
@@ -37,25 +97,16 @@ void deleteNode(Node * head)
         delete current;
         current = nullptr;
     }
-    output(head);
+    return head;
 }
 
-
-
-int main() {
-    Node *head = nullptr;
-    int count = 0;
-    addNode(head); 
-    
-
-    deleteNode(head);
-   
-
-    // insert a node
+Node * insertNode(Node * head) 
+{
+     // insert a node
     int entry;
     Node * current = head;
     cout << "After which node to insert 10000? " << endl;
-    count = 1;
+    int count = 1;
     while (current) {
         cout << "[" << count++ << "] " << current->value << endl;
         current = current->next;
@@ -77,53 +128,17 @@ int main() {
     newnode->value = 10000;
     newnode->next = current;
     prev->next = newnode;
-    output(head);
+    return head;
+}
 
-    // deleting the linked list
-    current = head;
+void deleteList(Node * head)
+{
+    Node * current = head;
     while (current) {
         head = current->next;
         delete current;
         current = head;
     }
     head = nullptr;
-    output(head);
-
-    return 0;
-}
-
-void output(Node * hd) {
-    if (!hd) {
-        cout << "Empty list.\n";
-        return;
-    }
-    int count = 1;
-    Node * current = hd;
-    while (current) {
-        cout << "[" << count++ << "] " << current->value << endl;
-        current = current->next;
-    }
-    cout << endl;
-}
-
-void addNode(Node * head) 
-{
-// create a linked list of size SIZE with random numbers 0-99
-    for (int i = 0; i < SIZE; i++) {
-        int tmp_val = rand() % 100;
-        Node *newVal = new Node;
-        
-        // adds node at head
-        if (!head) { // if this is the first node, it's the new head
-            head = newVal;
-            newVal->next = nullptr;
-            newVal->value = tmp_val;
-        }
-        else { // its a second or subsequent node; place at the head
-            newVal->next = head;
-            newVal->value = tmp_val;
-            head = newVal;
-        }
-    }
     output(head);
 }
