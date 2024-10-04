@@ -20,9 +20,9 @@ void deleteList(Node *);
 
 int main() {
     Node *head = nullptr;
-    int count = 0;
+    
     head = addNodeToHead(head); 
-    output(head); 
+    //output(head); 
 
     head = addNodeToTail(head);
     output(head);
@@ -44,13 +44,15 @@ void output(Node * hd) {
         cout << "Empty list.\n";
         return;
     }
+    
     int count = 1;
     Node * current = hd;
-    while (current) {
+    while (current != nullptr ) {
         cout << "[" << count++ << "] " << current->value << endl;
         current = current->next;
     }
     cout << endl;
+    
 }
 
 Node * addNodeToHead(Node * head) 
@@ -78,25 +80,24 @@ Node * addNodeToHead(Node * head)
 Node * addNodeToTail(Node * head)
 {
     int val = rand() % 100; 
-    Node * newNode = new Node; 
+    Node * newNode = new Node; // make a new node
+    newNode->value = val; 
 
     if(!head)   // check to see if list if empty
     {
         head = newNode;
         newNode->next = nullptr; 
-        newNode->value = val; 
     }
 
     else
     {
-        newNode->value = val;
-        Node * current = head;
-        while(current->next) 
+        Node * newN = head;
+        while(newN->next != nullptr) 
             {
-                current = current->next;
+                newN = newN->next;
             } 
     
-        current->next = newNode; 
+        newN->next = newNode; 
      
     }
 
